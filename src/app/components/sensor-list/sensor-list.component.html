@@ -1,0 +1,11 @@
+<div class="container pt-4 px-6">
+    <div class="flex mb-4">
+        <div class="flex-1 h-20 p-2" *ngFor="let x of sensors | keyvalue">
+            <div class="tile p-2">
+                <h6>{{ x.value.name }}</h6>
+                <strong *ngIf="x.value.value">{{ x.value.value }}&nbsp;°C</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
