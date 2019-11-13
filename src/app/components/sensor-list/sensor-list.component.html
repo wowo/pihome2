@@ -1,9 +1,12 @@
 <div class="container pt-4 px-6">
-    <div class="flex mb-4">
-        <div class="flex-1 h-20 p-2" *ngFor="let x of sensors | keyvalue">
+    <div class="flex flex-wrap mb-4">
+        <div class="w-1/4 h-22 p-2 mt-4" *ngFor="let x of sensors | keyvalue">
             <div class="tile p-2">
                 <h6>{{ x.value.name }}</h6>
-                <strong *ngIf="x.value.value">{{ x.value.value }}&nbsp;°C</strong>
+                <div *ngIf="x.value.value">
+                    <p><strong>{{ x.value.value }}&nbsp;°C</strong></p>
+                    <p class="sensor-update mt-2">{{ x.value.when | amLocale:'pl' | amCalendar }}</p>
+                </div>
             </div>
         </div>
     </div>
