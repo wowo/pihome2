@@ -5,4 +5,11 @@ export class Switch {
     stateless: boolean;
     state: any;
     type: string;
+
+    get castedState() {
+        switch (this.state) {
+            default:
+                return this.state;
+        }
+    }
 }
