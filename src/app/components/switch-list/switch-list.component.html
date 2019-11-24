@@ -1,0 +1,8 @@
+<div class="flex flex-wrap mb-4">
+    <div class="tile" [ngClass]="getClass(x.value)" *ngFor="let x of switches | keyvalue">
+        <div class="tile-background relative" [ngClass]="x.value.icon">
+            <p class="switch-title">{{ x.value.name | nameShortener }}</p>
+            <app-toggle [switch]="x.value"></app-toggle>
+        </div>
+    </div>
+</div>

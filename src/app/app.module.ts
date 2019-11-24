@@ -6,8 +6,11 @@ import {SensorListComponent} from './components/sensor-list/sensor-list.componen
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {environment} from '../environments/environment';
 import {MomentModule} from 'ngx-moment';
+import { SwitchListComponent } from './components/switch-list/switch-list.component';
+import { NameShortenerPipe } from './components/switch-list/name-shortener.pipe';
+import { ToggleComponent } from './components/toggle/toggle.component';
 
-const config: SocketIoConfig = {url: environment.socketServer, options: {}};
+const config: SocketIoConfig = {url: environment.socketServer, options: environment.socketOptions};
 
 @NgModule({
     imports: [
@@ -18,7 +21,10 @@ const config: SocketIoConfig = {url: environment.socketServer, options: {}};
     ],
     declarations: [
         AppComponent,
-        SensorListComponent
+        SensorListComponent,
+        SwitchListComponent,
+        NameShortenerPipe,
+        ToggleComponent
     ],
     bootstrap: [AppComponent]
 })

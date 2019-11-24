@@ -3,5 +3,4 @@ export class Sensor {
     name: string;
     value: number;
     when: string;
-    address: string;
 }

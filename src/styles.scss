@@ -4,8 +4,72 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
 
-.tile {
-  @apply bg-white;
-  @apply rounded-lg;
-  @apply h-20;
+body {
+  background-color: #f1f5fe;
 }
+
+.tile {
+  @apply bg-white rounded h-16 m-2 text-sm;
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+  height: 6rem;
+  width:7rem;
+  padding: 00.5rem 0.5rem;
+}
+.tile-short {
+  @extend .tile;
+  height: 4rem;
+}
+
+.sensor-value {
+  //@apply text-right;
+}
+.sensor-title,
+.switch-title {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  line-height: 1.5rem;
+}
+
+.tile-background {
+  background-size: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: right top;
+  height: 85%;
+}
+
+.thermometer {
+  @extend .tile-background;
+  height: auto;
+  background-image:url('assets/icons/thermometer.svg');
+  background-size: 3em;
+  background-position-x: right;
+  background-position: right top 0.5rem;
+}
+.led {
+  background-image:url('assets/icons/led.svg');
+}
+.light {
+  background-image:url('assets/icons/light.svg');
+}
+.blind {
+  background-image:url('assets/icons/blind.svg');
+}
+.pump {
+  background-image:url('assets/icons/pump.svg');
+}
+.heating {
+  background-image:url('assets/icons/heating.svg');
+}
+.gate {
+  background-image:url('assets/icons/gate.svg');
+}
+.garage {
+  background-image:url('assets/icons/garage.svg');
+}
+.state-on {
+  background: linear-gradient(to bottom right, hsla(152, 77%, 77%, 0.25), #ffffff);
+}
+.state-off {
+  background-image: linear-gradient(to bottom right, hsla(2, 85%, 57%, 0.25), #ffffff);
+}
+
