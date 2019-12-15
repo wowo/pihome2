@@ -5,11 +5,9 @@ export class Switch {
     stateless: boolean;
     state: any;
     type: string;
+    scheduled: object;
 
-    get castedState() {
-        switch (this.state) {
-            default:
-                return this.state;
-        }
+    public getCheckedState(): string {
+        return parseInt(this.state, 0) === 1 ? 'checked' : '';
     }
 }

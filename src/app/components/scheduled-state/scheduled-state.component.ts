@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Switch} from '../switch-list/models/switch';
 
 @Component({
-    selector: 'app-toggle',
-    templateUrl: './toggle.component.html',
-    styleUrls: ['./toggle.component.scss']
+    selector: 'app-scheduled-state',
+    templateUrl: './scheduled-state.component.html',
+    styleUrls: ['./scheduled-state.component.scss']
 })
-export class ToggleComponent implements OnInit {
+export class ScheduledStateComponent implements OnInit {
 
     @Input() switch: Switch;
 

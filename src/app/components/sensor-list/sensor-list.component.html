@@ -1,4 +1,4 @@
-<div class="flex flex-wrap mb-4">
+<div class="flex flex-wrap mb-4 justify-between">
     <div class="tile-short thermometer" *ngFor="let x of sensors | keyvalue">
         <p class="sensor-title">{{ x.value.name }}</p>
         <p class="sensor-value" *ngIf="x.value.value">{{ x.value.value }}&nbsp;°C</p>

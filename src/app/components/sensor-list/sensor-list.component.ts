@@ -25,13 +25,8 @@ export class SensorListComponent implements OnInit {
     ngOnInit() {
         console.log('Connecting');
         const self = this;
-        self.sensors.set('basement', {'key': 'basement', 'name': 'Piwnica', 'value': 11.4} as Sensor);
-        self.sensors.set('x1', {'key': 'x1', 'name': 'Wiatrołap', 'value': 21.4} as Sensor);
-        self.sensors.set('x2', {'key': 'x2', 'name': 'Kuchnia', 'value': 21.4} as Sensor);
-        self.sensors.set('x3', {'key': 'x3', 'name': 'Zewnątrz', 'value': 1.4} as Sensor);
-        /*
         this.socket.fromEvent<Sensor>('sensor').subscribe(sensor => {
-            self.sensors.set(sensor.key, sensor);
+            self.sensors.set(sensor.key, Object.assign(new Sensor(), sensor));
             self.lastUpdate = sensor.when;
 
             if (self.sensorsList.filter(x => x[0] === sensor.key).length === 0) {
@@ -39,7 +34,6 @@ export class SensorListComponent implements OnInit {
                 localStorage.setItem('sensors', JSON.stringify(self.sensorsList));
             }
         });
-        */
     }
 
 }

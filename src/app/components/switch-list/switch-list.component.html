@@ -1,7 +1,8 @@
-<div class="flex flex-wrap mb-4">
+<div class="flex flex-wrap mb-4 justify-between">
     <div class="tile" [ngClass]="getClass(x.value)" *ngFor="let x of switches | keyvalue">
         <div class="tile-background relative" [ngClass]="x.value.icon">
             <p class="switch-title">{{ x.value.name | nameShortener }}</p>
+            <app-scheduled-state [switch]="x.value"></app-scheduled-state>
             <app-toggle *ngIf="['ethernet', 'raspberry'].indexOf(x.value.type) > -1" [switch]="x.value"></app-toggle>
         </div>
     </div>

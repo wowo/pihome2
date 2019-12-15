@@ -9,6 +9,7 @@ import {MomentModule} from 'ngx-moment';
 import { SwitchListComponent } from './components/switch-list/switch-list.component';
 import { NameShortenerPipe } from './components/switch-list/name-shortener.pipe';
 import { ToggleComponent } from './components/toggle/toggle.component';
+import { ScheduledStateComponent } from './components/scheduled-state/scheduled-state.component';
 
 const config: SocketIoConfig = {url: environment.socketServer, options: environment.socketOptions};
 
@@ -24,7 +25,8 @@ const config: SocketIoConfig = {url: environment.socketServer, options: environm
         SensorListComponent,
         SwitchListComponent,
         NameShortenerPipe,
-        ToggleComponent
+        ToggleComponent,
+        ScheduledStateComponent
     ],
     bootstrap: [AppComponent]
 })

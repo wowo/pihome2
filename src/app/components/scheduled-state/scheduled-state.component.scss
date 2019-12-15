@@ -1,0 +1,13 @@
+.label {
+  @apply inline-block text-xs px-2 rounded-full uppercase font-semibold tracking-wide;
+
+}
+.label-on {
+  @extend .label;
+  @apply bg-green-200 text-green-800;
+}
+
+.label-off {
+  @extend .label;
+  @apply bg-red-200 text-red-800;
+}

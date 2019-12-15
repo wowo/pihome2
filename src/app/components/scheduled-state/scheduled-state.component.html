@@ -1,0 +1,4 @@
+<small class="scheduled" *ngIf="switch.scheduled">
+    <span [ngClass]="{'label-on': 1 == switch.scheduled.state, 'label-off': 0 == switch.scheduled.state}">{{ switch.scheduled.state == 1 ? 'On' : 'Off' }}</span>
+    {{ switch.scheduled.when | date : 'shortTime' }}
+</small>

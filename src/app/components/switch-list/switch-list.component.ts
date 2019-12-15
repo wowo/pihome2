@@ -9,7 +9,7 @@ import {Switch} from "./models/switch";
 })
 export class SwitchListComponent implements OnInit {
 
-    switches = new Map<string, any>();
+    switches = new Map<string, Switch>();
     switchList = new Array<Array<string>>();
 
     constructor(private socket: Socket) {
@@ -19,8 +19,9 @@ export class SwitchListComponent implements OnInit {
         console.log('Connecting');
         const self = this;
         this.socket.fromEvent<Switch>('switch').subscribe((sw: Switch) => {
-            self.switches.set(sw.key, sw);
+            self.switches.set(sw.key, Object.assign(new Switch(), sw));
 
+            console.log(sw.key, sw as Switch);
             if (self.switchList.filter(x => x[0] === sw.key).length === 0) {
                 self.switchList.push([sw.key, sw.name]);
                 localStorage.setItem('switchesList', JSON.stringify(self.switchList));
