@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SensorsComponent } from './sensors/sensors.component';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from "@angular/common/http";
+import {NgModule} from '@angular/core';
 import {NgxEchartsModule} from "ngx-echarts";
+import {SensorsComponent} from './sensors/sensors.component';
 
 @NgModule({
   declarations: [
@@ -14,9 +14,10 @@ import {NgxEchartsModule} from "ngx-echarts";
   imports: [
     BrowserModule,
     AppRoutingModule,
-      NgxEchartsModule.forRoot({
-        echarts: () => import('echarts'),
-      })
+    HttpClientModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

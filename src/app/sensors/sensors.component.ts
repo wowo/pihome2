@@ -1,42 +1,50 @@
 import {Component, OnInit} from '@angular/core';
 import {EChartsOption} from 'echarts';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-sensors',
     templateUrl: './sensors.component.html',
     styleUrls: ['./sensors.component.scss']
 })
+
 export class SensorsComponent implements OnInit {
+
+    public loading = true;
+
+    constructor(private http: HttpClient) {
+    }
+
     public chartOptions: EChartsOption = {
         legend: {},
+        xAxis: {type: 'time'},
+        yAxis: {scale: true},
         tooltip: {
             trigger: 'axis',
+            show: true,
         },
-        dataset: {
-            source: [
-                ['2022-05-24 10:00:00', 400, 600],
-                ['2022-05-24 10:05:00', 450, 550],
-                ['2022-05-24 10:10:00', 500, 640],
-            ],
-            dimensions: ['timestamp', 'sensor 1', 'sensor 2'],
-        },
-        xAxis: {type: 'time'},
-        yAxis: {},
-        series: [
-            {
-                name: 'sensor 1',
-                type: 'line',
-                encode: {x: 'timestamp', y: 'sensor 1'}
-            },
-            {
-                name: 'sensor 2',
-                type: 'line',
-                encode: {x: 'timestamp', y: 'sensor 2'}
-            },
-        ]
     }
 
     ngOnInit(): void {
+        this.http.get<ApiResponse>('/assets/readings.json').subscribe((data: ApiResponse) => {
+            const keys = Object.keys(data['_embedded'][0]);
+            this.chartOptions.dataset = {
+                source: data['_embedded'].map(Object.values),
+                dimensions: keys,
+            }
+            this.chartOptions.series = keys.slice(1).map(val => ({
+                name: val.replace('_', ' '),
+                type: 'line',
+                symbol: 'none',
+                encode: {x: 'timestamp', y: val}
+
+            }));
+            this.loading = false;
+        });
     }
 
 }
+class ApiResponse {
+    public _embedded: Array<any> = [];
+}
+
