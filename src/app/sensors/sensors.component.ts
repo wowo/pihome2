@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EChartsOption} from 'echarts';
 import {HttpClient} from "@angular/common/http";
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-sensors',
@@ -10,9 +11,19 @@ import {HttpClient} from "@angular/common/http";
 
 export class SensorsComponent implements OnInit {
 
-    public loading = true;
+    public URL = 'https://pihome.sznapka.pl/api/reading'; // '/assets/readings.json'
+
+    public chartLoaded = false;
+    public source: string = '';
+    public dateFrom: string | null = '';
+    public dateTo: string | null = '';
 
     constructor(private http: HttpClient) {
+        this.source = localStorage.getItem('sensors_source') || 'temperatures';
+        let yesterday = new Date();
+        yesterday.setDate((new Date).getDate() - 1);
+        this.dateFrom = new DatePipe('en').transform(yesterday, 'YYYY-MM-dd');
+        this.dateTo = new DatePipe('en').transform(new Date(), 'YYYY-MM-dd');
     }
 
     public chartOptions: EChartsOption = {
@@ -26,7 +37,14 @@ export class SensorsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.http.get<ApiResponse>('/assets/readings.json').subscribe((data: ApiResponse) => {
+        this.loadChartData();
+    }
+
+    public loadChartData() {
+        console.log(this.dateFrom, this.dateTo, this.source);
+        this.chartLoaded = false;
+        let url = this.URL + `?collection=${this.source}&since=${this.dateFrom}&until=${this.dateTo}`;
+        this.http.get<ApiResponse>(url, {withCredentials: true}).subscribe((data: ApiResponse) => {
             const keys = Object.keys(data['_embedded'][0]);
             this.chartOptions.dataset = {
                 source: data['_embedded'].map(Object.values),
@@ -39,10 +57,9 @@ export class SensorsComponent implements OnInit {
                 encode: {x: 'timestamp', y: val}
 
             }));
-            this.loading = false;
+            this.chartLoaded = true;
         });
     }
-
 }
 class ApiResponse {
     public _embedded: Array<any> = [];

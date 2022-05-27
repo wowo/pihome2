@@ -75,7 +75,8 @@
               "browserTarget": "pihome2:build:production"
             },
             "development": {
-              "browserTarget": "pihome2:build:development"
+              "browserTarget": "pihome2:build:development",
+              "disableHostCheck": true
             }
           },
           "defaultConfiguration": "development"

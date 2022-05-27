@@ -1,7 +1,21 @@
 <h1>Sensors</h1>
+<div class="input-group input-group-sm mb-5">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" [(ngModel)]="source" id="radio1" value="temperatures" name="source">
+        <label class="form-check-label" for="radio1">Temperature</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" [(ngModel)]="source" id="radio2" value="light" name="source">
+        <label class="form-check-label" for="radio2">Light</label>
+    </div>
+        <span class="input-group-text">From:</span>
+        <input class="form-control" type="date" [(ngModel)]="dateFrom">
+        <span class="input-group-text">To:</span>
+        <input class="form-control" type="date" [(ngModel)]="dateTo">&nbsp;
+        <button class="btn btn-success" (click)="loadChartData()">OK</button>
+</div>
 <div class="flex">
-    <div class="flex-item">
-        <div echarts [options]="chartOptions" [autoResize]="true" [loading]="loading">
-        </div>
+    <div class="flex-item" *ngIf="chartLoaded">
+        <div echarts [options]="chartOptions" [autoResize]="true"></div>
     </div>
 </div>
