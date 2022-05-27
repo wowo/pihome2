@@ -14,12 +14,10 @@ export class SensorsComponent implements OnInit {
     public URL = 'https://pihome.sznapka.pl/api/reading'; // '/assets/readings.json'
 
     public chartLoaded = false;
-    public source: string = '';
     public dateFrom: string | null = '';
     public dateTo: string | null = '';
 
     constructor(private http: HttpClient) {
-        this.source = localStorage.getItem('sensors_source') || 'temperatures';
         let yesterday = new Date();
         yesterday.setDate((new Date).getDate() - 1);
         this.dateFrom = new DatePipe('en').transform(yesterday, 'YYYY-MM-dd');
@@ -29,7 +27,10 @@ export class SensorsComponent implements OnInit {
     public chartOptions: EChartsOption = {
         legend: {},
         xAxis: {type: 'time'},
-        yAxis: {scale: true},
+        yAxis: [
+          {scale: true, position: 'left'},
+          {scale: true, position: 'right'},
+        ],
         tooltip: {
             trigger: 'axis',
             show: true,
@@ -41,19 +42,19 @@ export class SensorsComponent implements OnInit {
     }
 
     public loadChartData() {
-        console.log(this.dateFrom, this.dateTo, this.source);
         this.chartLoaded = false;
-        let url = this.URL + `?collection=${this.source}&since=${this.dateFrom}&until=${this.dateTo}`;
+        let url = this.URL + `?since=${this.dateFrom}&until=${this.dateTo}`;
         this.http.get<ApiResponse>(url, {withCredentials: true}).subscribe((data: ApiResponse) => {
             const keys = Object.keys(data['_embedded'][0]);
             this.chartOptions.dataset = {
                 source: data['_embedded'].map(Object.values),
                 dimensions: keys,
             }
-            this.chartOptions.series = keys.slice(1).map(val => ({
+            this.chartOptions.series = keys.slice(1).map((val: string) => ({
                 name: val.replace('_', ' '),
                 type: 'line',
                 symbol: 'none',
+                yAxisIndex: val.includes('light') ? 1 : 0,
                 encode: {x: 'timestamp', y: val}
 
             }));
