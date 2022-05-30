@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {MainComponent} from './main/main.component';
 import {NgModule} from '@angular/core';
 import {NgxEchartsModule} from "ngx-echarts";
 import {SensorsComponent} from './sensors/sensors.component';
@@ -11,7 +12,8 @@ import {SensorsComponent} from './sensors/sensors.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SensorsComponent
+    SensorsComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
