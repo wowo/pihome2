@@ -18,9 +18,7 @@ export class SensorsComponent implements OnInit {
     public dateTo: string | null = '';
 
     constructor(private http: HttpClient) {
-        let yesterday = new Date();
-        yesterday.setDate((new Date).getDate() - 1);
-        this.dateFrom = new DatePipe('en').transform(yesterday, 'YYYY-MM-dd');
+        this.dateFrom = new DatePipe('en').transform(new Date(), 'YYYY-MM-dd');
         this.dateTo = new DatePipe('en').transform(new Date(), 'YYYY-MM-dd');
     }
 
