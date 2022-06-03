@@ -1,7 +1,9 @@
+import {ApiResponse} from "../api-response";
 import {Component, OnInit} from '@angular/core';
+import {DatePipe} from "@angular/common";
 import {EChartsOption} from 'echarts';
 import {HttpClient} from "@angular/common/http";
-import {DatePipe} from "@angular/common";
+import {environment} from "../../environments/environment";
 
 @Component({
     selector: 'app-sensors',
@@ -11,7 +13,7 @@ import {DatePipe} from "@angular/common";
 
 export class SensorsComponent implements OnInit {
 
-    public URL = 'https://pihome.sznapka.pl/api/reading'; // '/assets/readings.json'
+    public URL = '/reading'; // '/assets/readings.json'
 
     public chartLoaded = false;
     public dateFrom: string | null = '';
@@ -41,7 +43,7 @@ export class SensorsComponent implements OnInit {
 
     public loadChartData() {
         this.chartLoaded = false;
-        let url = this.URL + `?since=${this.dateFrom}&until=${this.dateTo}`;
+        let url = environment.apiUrl +  this.URL + `?since=${this.dateFrom}&until=${this.dateTo}`;
         this.http.get<ApiResponse>(url, {withCredentials: true}).subscribe((data: ApiResponse) => {
             const keys = Object.keys(data['_embedded'][0]);
             this.chartOptions.dataset = {
@@ -60,7 +62,3 @@ export class SensorsComponent implements OnInit {
         });
     }
 }
-class ApiResponse {
-    public _embedded: Array<any> = [];
-}
-

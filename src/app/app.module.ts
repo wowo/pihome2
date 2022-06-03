@@ -8,6 +8,7 @@ import {MainComponent} from './main/main.component';
 import {NgModule} from '@angular/core';
 import {NgxEchartsModule} from "ngx-echarts";
 import {SensorsComponent} from './sensors/sensors.component';
+import {SwitchApiService} from "./switch-api.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {SensorsComponent} from './sensors/sensors.component';
     }),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [SwitchApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
+import {SwitchApiService} from "../switch-api.service";
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private switchApi: SwitchApiService) {
+  }
 
   ngOnInit(): void {
+    this.switchApi.fetch();
   }
 
 }
