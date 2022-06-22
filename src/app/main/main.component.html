@@ -1,1 +1,13 @@
-<p>main works!</p>
+<div class="alert alert-danger" role="alert" *ngIf="switchesError">{{ switchesError }}</div>
+
+<div *ngFor="let group of switches | keyvalue">
+  <h4 class="text-center hidden-xs">{{ group.key }}</h4>
+  <div class="row">
+    <div *ngFor="let switch of $any(group).value" class="col-xs-4 col-lg-3">
+      <app-click-switch *ngIf="switch.type == 'click'" [data]="switch"></app-click-switch>
+      <app-twoway-switch *ngIf="switch.type == 'two_way'" [data]="switch"></app-twoway-switch>
+      <app-ethernet-switch *ngIf="switch.type == 'ethernet'" [data]="switch"></app-ethernet-switch>
+      <app-click-switch *ngIf="switch.type == 'raspberry'" [data]="switch"></app-click-switch>
+    </div>
+  </div>
+</div>
